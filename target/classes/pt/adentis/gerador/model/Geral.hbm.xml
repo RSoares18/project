@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pt.adentis.gerador.model">
+	<class name="Geral" table="DBO.GERAL">
+		<id name="p_id" column="P_ID">
+			<generator class="native"/>
+		</id>
+		<property name="id_tipo" />
+		<property name="id_tipo_c" />
+		<property name="destino" />
+		<property name="u_gerador" />
+		<property name="localizacao" />
+		<property name="sal_base" />
+		<property name="sal_liq" />
+		<property name="sal_liq_ano" />
+		<property name="sub_ali" />
+		<property name="pl_ben" />
+		<property name="id_cat_pf" />
+		
+	</class>	
+</hibernate-mapping>

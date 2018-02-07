@@ -1,0 +1,30 @@
+@charset "ISO-8859-1";
+
+body{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: #ddd;
+	background-image: url("1.jpg");
+	background-size: cover;
+}
+
+.topmenu{
+	color: #fff;
+	background-color: #fff;
+}
+
+.container-fluid{
+	font-size: 12px;
+}
+
+.h1{
+	font-size: 12px;
+	
+}
+
+.fields {
+	color: #fff;
+	
+}
+
+
