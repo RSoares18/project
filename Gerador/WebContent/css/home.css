@@ -1,0 +1,69 @@
+@charset "ISO-8859-1";
+body{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: #ddd;
+	background-image: url("night.jpg");
+	background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-signin{
+	max-width: 250px;
+	padding: 20px;
+	margin: 1;
+/* 	margin: 0 auto; */
+}
+
+
+.form-signin-heading{
+	font: fantasy;
+	font-size: 16px;
+	color: #1a497f; 
+}
+
+.container{
+	background-color: #fff;
+	max-width: 250px;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+}
+
+.form-signin .form-signin-heading,
+.form-signin{
+	margin-bottom: 15px;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+	padding: 10px;
+	font-size: 12px;
+}
+
+.form-signin .form-control:focus{
+	z-index: 2;
+}
+
+.form-signin input [type="text"] {
+	margin-bottom: 12px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input [type="password"]{
+	margin-bottom: 12px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;	
+}
+
+.btn{
+	margin-top: 8px;
+	padding: 5px;
+	margin-bottom: 8px;
+	color: #1a497f;
+	background-color: #fff;
+}

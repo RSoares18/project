@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans		 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<bean id ="formActionBean" class="pt.adentis.gerador.action.FormAction">
+		<property name="catprofDAO" ref="catprofDAO" />
+		<property name="tipocontratoDAO" ref="tipocontratoDAO" />
+		<property name="tipopropostaDAO" ref="tipopropostaDAO"/>
+	</bean>
+	
+	<bean id ="catprofDAO" class="pt.adentis.gerador.dao.CatProfissionalDAOImpl">
+		<constructor-arg>
+			<ref bean ="sessionFactory"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id ="tipocontratoDAO" class="pt.adentis.gerador.dao.TipoContratoDAOImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id ="tipopropostaDAO" class="pt.adentis.gerador.dao.TipoPropostaDAOImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory"/>
+		</constructor-arg>
+	</bean>
+
+
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+	
+
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	        <property name="url" value="jdbc:mysql://localhost:3306/geradordb" />
+	        <property name="username" value="root" />
+	        <property name="password" value="user1234" />
+	</bean> -->
+	
+		<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+			<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+	        <property name="url" value="jdbc:sqlserver://DESKTOP-IK487B5\SQLEXPRESS;databaseName=geradorb;" />
+  	        <property name="username" value="sa" />
+	        <property name="password" value="Admin2018" /> 
+	</bean>
+
+	<tx:annotation-driven/>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>
