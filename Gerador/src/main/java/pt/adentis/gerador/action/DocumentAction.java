@@ -255,8 +255,7 @@ public class DocumentAction extends HttpServlet{
 
 	                    	System.out.println("RUNS CICLO" + "\n");
 	                    	
-	                    	checkEmpty(r);
-	                    	
+	  
 	                    	subProposta(r);
 
 	                    	subSolicitador(r);
@@ -276,6 +275,8 @@ public class DocumentAction extends HttpServlet{
 	                    	subPlBen(r);
 
 	                    	checkPageEnd(r);
+	                    	
+	                    	checkPic(r);
 	               
 	                    }
 
@@ -294,6 +295,36 @@ public class DocumentAction extends HttpServlet{
 	
 	
 	
+	private void checkPic(XWPFRun r) {
+		String text = r.getText(0);
+		System.out.println("TEXTO CHECK PIC: " + text);
+		
+		if(text != null && text.contains("var_adentis_main_logo")) {
+			System.out.println("!!!!PICPICPIC!!!!!");
+			text.replace("var_adentis_main_logo", " ");
+			r.setText(text,0);
+			InputStream pic;
+			try {
+				File img = new File("adentispg1.png".trim());
+				System.out.println("!!!!PICPICPIC!!!!!");
+				pic = new FileInputStream(img);
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "adentispg1.png", 200, 200);
+				pic.close();
+			} catch (FileNotFoundException e) {
+				System.out.println("Ficheiro não encontrado");
+				e.printStackTrace();
+			} catch (InvalidFormatException e) {
+				System.out.println("Formato inválido");
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	
 	private void checkPageEnd(XWPFRun r) {
 		String text = r.getText(0);
         System.out.println("TEXTO: " + text);
@@ -306,23 +337,17 @@ public class DocumentAction extends HttpServlet{
         	r.addBreak(BreakType.PAGE);
         	r.addBreak();
         }
+        
+        if (text != null && text.contains("--b")) {
+        	text = text.replace("--b",
+                    "");
+            r.setText(text, 0);
+//        	r.addCarriageReturn();                 
+        	r.addBreak();
+        }
 		
 	}
 
-	private void checkEmpty(XWPFRun r) {
-		String text = r.getText(0);
-        System.out.println("TEXTO: " + text);
-        
-        if (text != null && text.contains("--b")) {
-            text = text.replace("--b",
-                    " ");
-            r.setText(text + " ", 0);
-            r.addBreak();
-//            System.out.println("var_pl_ben SUBSTITUIDO POR " + fields.get(10));
-        
-        }
-	}
-	
 	private void subPlBen(XWPFRun r) {
 		String text = r.getText(0);
         System.out.println("TEXTO: " + text);
@@ -419,6 +444,14 @@ public class DocumentAction extends HttpServlet{
             System.out.println("var_colaborador SUBSTITUIDO POR " + fields.get(0));
         
         }
+        
+        if (text != null && text.contains("VAR_COLABORADOR")) {
+            text = text.replace("VAR_COLABORADOR",
+                    fields.get(0).toUpperCase());
+            r.setText(text + " ", 0);
+            System.out.println("var_colaborador SUBSTITUIDO POR " + fields.get(0).toUpperCase());
+        
+        }
 		
 	}
 
@@ -431,6 +464,14 @@ public class DocumentAction extends HttpServlet{
                     fields.get(1));
             r.setText(text + " ", 0);
             System.out.println("var_solicitador SUBSTITUIDO POR " + fields.get(1));
+
+        }
+        
+        if (text != null && text.contains("VAR_SOLICITADOR")) {
+            text = text.replace("VAR_SOLICITADOR",
+                    fields.get(1).toUpperCase());
+            r.setText(text + " ", 0);
+            System.out.println("var_solicitador SUBSTITUIDO POR " + fields.get(1).toUpperCase());
 
         }
 		
@@ -446,6 +487,15 @@ public class DocumentAction extends HttpServlet{
                    fields.get(3));
             r.setText(text + " ", 0);
             System.out.println("var_tp_proposta SUBSTITUIDO POR " + fields.get(3));
+
+        }
+        
+        if (text != null
+                && text.contains("VAR_TP_PROPOSTA")) {
+            text = text.replace("VAR_TP_PROPOSTA",
+                   fields.get(3).toUpperCase());
+            r.setText(text + " ", 0);
+            System.out.println("var_tp_proposta SUBSTITUIDO POR " + fields.get(3).toUpperCase());
 
         }
 		
