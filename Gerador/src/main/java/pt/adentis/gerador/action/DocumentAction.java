@@ -299,16 +299,17 @@ public class DocumentAction extends HttpServlet{
 		String text = r.getText(0);
 		System.out.println("TEXTO CHECK PIC: " + text);
 		
+		
 		if(text != null && text.contains("var_adentis_main_logo")) {
 			System.out.println("!!!!PICPICPIC!!!!!");
 			text.replace("var_adentis_main_logo", " ");
 			r.setText(text,0);
 			InputStream pic;
 			try {
-				File img = new File("adentispg1.png".trim());
+				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\adentispg1.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "adentispg1.png", 200, 200);
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\adentispg1.png", 200, 200);
 				pic.close();
 			} catch (FileNotFoundException e) {
 				System.out.println("Ficheiro não encontrado");
