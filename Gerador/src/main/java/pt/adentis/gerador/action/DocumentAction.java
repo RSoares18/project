@@ -255,15 +255,26 @@ public class DocumentAction extends HttpServlet{
 
 	                    	System.out.println("RUNS CICLO" + "\n");
 	                    	
+	                    	checkEmpty(r);
+	                    	
 	                    	subProposta(r);
+
 	                    	subSolicitador(r);
+
 	                    	subColaborador(r);
+             
 	                    	subContrato(r);
+
 	                    	subLocalizacao(r);
+
 	                    	subSalLiq(r);
+
 	                    	subSalLiqAnual(r);
+
 	                    	subSalBruto(r);
+
 	                    	subPlBen(r);
+
 	                    	checkPageEnd(r);
 	               
 	                    }
@@ -281,6 +292,8 @@ public class DocumentAction extends HttpServlet{
 	
 	}
 	
+	
+	
 	private void checkPageEnd(XWPFRun r) {
 		String text = r.getText(0);
         System.out.println("TEXTO: " + text);
@@ -291,10 +304,25 @@ public class DocumentAction extends HttpServlet{
             r.setText(text, 0);
         	r.addCarriageReturn();                 
         	r.addBreak(BreakType.PAGE);
+        	r.addBreak();
         }
 		
 	}
 
+	private void checkEmpty(XWPFRun r) {
+		String text = r.getText(0);
+        System.out.println("TEXTO: " + text);
+        
+        if (text != null && text.contains("--b")) {
+            text = text.replace("--b",
+                    " ");
+            r.setText(text + " ", 0);
+            r.addBreak();
+//            System.out.println("var_pl_ben SUBSTITUIDO POR " + fields.get(10));
+        
+        }
+	}
+	
 	private void subPlBen(XWPFRun r) {
 		String text = r.getText(0);
         System.out.println("TEXTO: " + text);
