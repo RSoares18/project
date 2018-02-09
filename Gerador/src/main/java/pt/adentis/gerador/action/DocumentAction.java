@@ -312,10 +312,10 @@ public class DocumentAction extends HttpServlet{
 			r.addBreak();
 			InputStream pic;
 			
-				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\adentispg1.png");
+				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\adentispg1.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\adentispg1.png", Units.toEMU(150), Units.toEMU(130));
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\adentispg1.png", Units.toEMU(150), Units.toEMU(130));
 				
 				pic.close();
 			
@@ -328,10 +328,10 @@ public class DocumentAction extends HttpServlet{
 			System.out.println("var_logo_moleculas" +  r.getText(0));
 			InputStream pic;
 			
-				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\moleculas.png");
+				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\moleculas.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\moleculas.png", Units.toEMU(230), Units.toEMU(204));
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\moleculas.png", Units.toEMU(230), Units.toEMU(204));
 				r.getParagraph().setAlignment(ParagraphAlignment.RIGHT);
 				
 				pic.close();
@@ -345,10 +345,10 @@ public class DocumentAction extends HttpServlet{
 
 			InputStream pic;
 			
-				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\adentis_hor.png");
+				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\adentis_hor.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\adentis_hor.png", Units.toEMU(129), Units.toEMU(16));
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\adentis_hor.png", Units.toEMU(129), Units.toEMU(16));
 				
 				
 				pic.close();
@@ -361,10 +361,10 @@ public class DocumentAction extends HttpServlet{
 			System.out.println("var_slash" +  r.getText(0));
 			InputStream pic;
 			
-				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\slash.png");
+				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\slash.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\slash.png", Units.toEMU(15), Units.toEMU(29));
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\slash.png", Units.toEMU(15), Units.toEMU(29));
 				
 				
 				pic.close();
