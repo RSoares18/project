@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.BreakType;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -295,34 +297,91 @@ public class DocumentAction extends HttpServlet{
 	
 	
 	
+	@SuppressWarnings("deprecation")
 	private void checkPic(XWPFRun r) {
 		String text = r.getText(0);
 		System.out.println("TEXTO CHECK PIC: " + text);
 		
+		try {
 		
 		if(text != null && text.contains("var_adentis_main_logo")) {
 			System.out.println("!!!!PICPICPIC!!!!!");
-			text.replace("var_adentis_main_logo", " ");
+			text = text.replace("var_adentis_main_logo", " ");
 			r.setText(text,0);
+			System.out.println("var_adentis_main_logo SUBSTITUIDO POR" +  r.getText(0));
+			r.addBreak();
 			InputStream pic;
-			try {
+			
 				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\adentispg1.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\adentispg1.png", 200, 200);
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\adentispg1.png", Units.toEMU(150), Units.toEMU(130));
+				
 				pic.close();
-			} catch (FileNotFoundException e) {
-				System.out.println("Ficheiro não encontrado");
-				e.printStackTrace();
-			} catch (InvalidFormatException e) {
-				System.out.println("Formato inválido");
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 		}
+		
+		if(text != null && text.contains("var_logo_moleculas")) {
+			System.out.println("!!!!PICPICPIC!!!!!");
+			text = text.replace("var_logo_moleculas", " ");
+			r.setText(text,0);
+			System.out.println("var_logo_moleculas" +  r.getText(0));
+			InputStream pic;
+			
+				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\moleculas.png");
+				System.out.println("!!!!PICPICPIC!!!!!");
+				pic = new FileInputStream(img);
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\moleculas.png", Units.toEMU(230), Units.toEMU(204));
+				r.getParagraph().setAlignment(ParagraphAlignment.RIGHT);
+				
+				pic.close();
+		}
+		
+		if(text != null && text.contains("var_adentis_horlogo")) {
+			System.out.println("!!!!PICPICPIC!!!!!");
+			text = text.replace("var_adentis_horlogo", " ");
+			r.setText(text,0);
+			System.out.println("var_adentis_horlogo" +  r.getText(0));
+
+			InputStream pic;
+			
+				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\adentis_hor.png");
+				System.out.println("!!!!PICPICPIC!!!!!");
+				pic = new FileInputStream(img);
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\adentis_hor.png", Units.toEMU(129), Units.toEMU(16));
+				
+				
+				pic.close();
+		}
+		
+		if(text != null && text.contains("var_slash")) {
+			System.out.println("!!!!PICPICPIC!!!!!");
+			text = text.replace("var_slash", " ");
+			r.setText(text,0);
+			System.out.println("var_slash" +  r.getText(0));
+			InputStream pic;
+			
+				File img = new File("C:\\Users\\PI_User\\Desktop\\pics\\slash.png");
+				System.out.println("!!!!PICPICPIC!!!!!");
+				pic = new FileInputStream(img);
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\PI_User\\Desktop\\pics\\slash.png", Units.toEMU(15), Units.toEMU(29));
+				
+				
+				pic.close();
+		}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Ficheiro não encontrado");
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			System.out.println("Formato inválido");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	
@@ -336,7 +395,6 @@ public class DocumentAction extends HttpServlet{
             r.setText(text, 0);
         	r.addCarriageReturn();                 
         	r.addBreak(BreakType.PAGE);
-        	r.addBreak();
         }
         
         if (text != null && text.contains("--b")) {
