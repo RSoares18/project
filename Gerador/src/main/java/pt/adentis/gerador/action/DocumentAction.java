@@ -279,6 +279,8 @@ public class DocumentAction extends HttpServlet{
 	                    	checkPageEnd(r);
 	                    	
 	                    	checkPic(r);
+	                    	
+//	                    	checkTables(r);
 	               
 	                    }
 
@@ -297,6 +299,72 @@ public class DocumentAction extends HttpServlet{
 	
 	
 	
+	private void checkTables(XWPFRun r) {
+		String text = r.getText(0);
+		System.out.println("TEXTO CHECK PIC: " + text);
+		String replacement ="";
+		int dimX = 0;
+		int dimY = 0;
+		
+		try {
+		
+		if(text != null && text.contains("data1")) {
+			replacement = "data1";
+			dimX=400;
+			dimY=50;
+		}
+		if(text != null && text.contains("data2")) {
+			replacement = "data2";
+			dimX=396;
+			dimY=15;
+		}
+		if(text != null && text.contains("data3")) {
+			replacement = "data3";
+			dimX=400;
+			dimY=25;
+		}if(text != null && text.contains("data4")) {
+			replacement = "data4";
+			dimX=400;
+			dimY=38;
+		}
+		if(text != null && text.contains("data5")) {
+			replacement = "data5";
+			dimX=398;
+			dimY=15;
+		}
+		if(text != null && text.contains("data6")) {
+			replacement = "data6";
+			dimX=800;
+			dimY=147;
+		}
+		
+			text = text.replace(replacement, " ");
+			r.setText(text,0);
+			System.out.println(replacement + "SUBSTITUIDO POR" +  r.getText(0));
+			r.addBreak();
+			InputStream pic;
+			
+				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png");
+				System.out.println("!!!!PICPICPIC!!!!!");
+				pic = new FileInputStream(img);
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png", Units.toEMU(dimX), Units.toEMU(dimY));
+				
+				pic.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Ficheiro não encontrado");
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			System.out.println("Formato inválido");
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		
+	}
+
 	@SuppressWarnings("deprecation")
 	private void checkPic(XWPFRun r) {
 		String text = r.getText(0);
