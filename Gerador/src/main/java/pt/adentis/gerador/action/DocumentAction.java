@@ -265,6 +265,8 @@ public class DocumentAction extends HttpServlet{
 	                    	subColaborador(r);
              
 	                    	subContrato(r);
+	                    	
+	                    	subCatProf(r);
 
 	                    	subLocalizacao(r);
 
@@ -280,7 +282,7 @@ public class DocumentAction extends HttpServlet{
 	                    	
 	                    	checkPic(r);
 	                    	
-//	                    	checkTables(r);
+	                    	checkTables(r);
 	               
 	                    }
 
@@ -306,52 +308,102 @@ public class DocumentAction extends HttpServlet{
 		int dimX = 0;
 		int dimY = 0;
 		
-		try {
+//		try {
 		
 		if(text != null && text.contains("data1")) {
 			replacement = "data1";
 			dimX=400;
 			dimY=50;
+			textReplacement(text,replacement,r, dimX, dimY);
 		}
 		if(text != null && text.contains("data2")) {
 			replacement = "data2";
 			dimX=396;
 			dimY=15;
+			textReplacement(text,replacement,r, dimX, dimY);
 		}
 		if(text != null && text.contains("data3")) {
 			replacement = "data3";
 			dimX=400;
 			dimY=25;
+			textReplacement(text,replacement,r, dimX, dimY);
 		}if(text != null && text.contains("data4")) {
 			replacement = "data4";
 			dimX=400;
 			dimY=38;
+			textReplacement(text,replacement,r, dimX, dimY);
 		}
 		if(text != null && text.contains("data5")) {
 			replacement = "data5";
 			dimX=398;
 			dimY=15;
+			textReplacement(text,replacement,r, dimX, dimY);
 		}
 		if(text != null && text.contains("data6")) {
 			replacement = "data6";
-			dimX=800;
-			dimY=147;
+			dimX=400;
+			dimY=73;
+			textReplacement(text,replacement,r, dimX, dimY);
+		}
+		if(text != null && text.contains("tabela1")) {
+			replacement = "tabela1";
+			dimX=400;
+			dimY=138;
+			textReplacement(text,replacement,r, dimX, dimY);
+		}
+		if(text != null && text.contains("tabela2")) {
+			replacement = "tabela2";
+			dimX=400;
+			dimY=224;
+			textReplacement(text,replacement,r, dimX, dimY);
+		}
+		if(text != null && text.contains("tabela3")) {
+			replacement = "tabela3";
+			dimX=350;
+			dimY=78;
+			textReplacement(text,replacement,r, dimX, dimY);
 		}
 		
-			text = text.replace(replacement, " ");
-			r.setText(text,0);
-			System.out.println(replacement + "SUBSTITUIDO POR" +  r.getText(0));
-			r.addBreak();
-			InputStream pic;
-			
-				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png");
-				System.out.println("!!!!PICPICPIC!!!!!");
-				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png", Units.toEMU(dimX), Units.toEMU(dimY));
-				
-				pic.close();
-			
-			
+//			text = text.replace(replacement, " ");
+//			r.setText(text,0);
+//			System.out.println(replacement + "SUBSTITUIDO POR" +  r.getText(0));
+//			r.addBreak();
+//			InputStream pic;
+//			
+//				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png");
+//				System.out.println("!!!!PICPICPIC!!!!!");
+//				pic = new FileInputStream(img);
+//				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png", Units.toEMU(dimX), Units.toEMU(dimY));
+//				
+//				pic.close();
+//			
+//			
+//		} catch (FileNotFoundException e) {
+//			System.out.println("Ficheiro não encontrado");
+//			e.printStackTrace();
+//		} catch (InvalidFormatException e) {
+//			System.out.println("Formato inválido");
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//
+//			e.printStackTrace();
+//		}
+		
+	}
+	
+	void textReplacement(String target, String replacement, XWPFRun r, int X, int Y) {
+		target = target.replace(replacement, "");
+		r.setText(target, 0);
+		r.addBreak();
+		
+		InputStream pic;
+		
+		File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png");
+		System.out.println("!!!!PICPICPIC!!!!!");
+		try {
+			pic = new FileInputStream(img);
+			r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\" + replacement + ".png", Units.toEMU(X), Units.toEMU(Y));
+			pic.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Ficheiro não encontrado");
 			e.printStackTrace();
@@ -541,6 +593,21 @@ public class DocumentAction extends HttpServlet{
                     fields.get(11));
             r.setText(text + " ", 0);
             System.out.println("var_localizacao SUBSTITUIDO POR " + fields.get(11));
+        
+        }
+		
+	}
+	
+	private void subCatProf(XWPFRun r) {
+		String text = r.getText(0);
+        System.out.println("CAT PROF" + catp);
+      
+        
+        if (text != null && text.contains(catp)) {
+        	System.out.println("SUB CAT PROF");
+            r.setBold(true);
+            System.out.println(r.getText(0));
+//            System.out.println("Var_sal_ano SUBSTITUIDO POR " + fields.get(8));
         
         }
 		
