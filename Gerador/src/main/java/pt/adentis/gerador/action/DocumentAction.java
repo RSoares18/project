@@ -364,6 +364,13 @@ public class DocumentAction extends HttpServlet{
 			textReplacement(text,replacement,r, dimX, dimY);
 		}
 		
+		if(text != null && text.contains("notas")) {
+			replacement = "notas";
+			dimX=400;
+			dimY=231;
+			textReplacement(text,replacement,r, dimX, dimY);
+		}
+		
 //			text = text.replace(replacement, " ");
 //			r.setText(text,0);
 //			System.out.println(replacement + "SUBSTITUIDO POR" +  r.getText(0));

@@ -6,6 +6,7 @@ body{
 	background-color: #ddd;
 	background-image: url("1.jpg");
 	background-size: cover;
+	opacity: .4;
 }
 
 .topmenu{
@@ -15,14 +16,20 @@ body{
 
 .container-fluid{
 	font-size: 12px;
+	color: #fff;
 }
 
-.h1{
+.h2{
 	font-size: 12px;	
+	color: #fff;
 }
 
 .fields {
 	color: #fff;	
 }
 
+.row {
+	color: #fff;
+}
+	
 

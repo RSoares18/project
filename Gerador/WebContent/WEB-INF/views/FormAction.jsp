@@ -13,7 +13,7 @@
 
 <script type=”text/javascript” src=”bootstrap/js/bootstrap.min.js”></script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="form.css" rel ="stylesheet"/>
+<link href="css/form.css" rel ="stylesheet"/>
 <%-- <style>
      <%@ include file="form.css"%>
 </style> --%>
@@ -61,8 +61,9 @@
 		
 		<h2> Preencha o seguinte formulário:</h2>
 		</div>
-		<s:form class ="fields" action ="DocumentAction" method="post">
+<%-- 		<s:form class ="fields" action ="DocumentAction" method="post"> --%>
 		
+		<form action ="DocumentAction" method ="post">
 		<div class ="row">
 			<div class="col-sm-2"> Solicitador de Proposta: </div>
 			<div class="col-sm-1"><input type = "text" name="solicitador" value= "${param.username}" readonly="readonly" /> </div>
@@ -78,32 +79,29 @@
 		<br>
 
 
-		<div class ="row">
+		
 			<div class="col-sm-4"><s:select label = "Seleccione o Tipo de Proposta"
 			headerKey="-1" headerValue="Seleccione um tipo de proposta"
 			list="listTipoPropostas"
 			listKey="p_tipo"
 			listValue="p_tipo"
 			name="tipoproposta"/></div>
-<!-- 		</div>
-		
-		<div class ="row"> -->
+
+
 			<div class="col-sm-4"><s:select label = "Seleccione o Tipo de Contrato"
 			headerKey="-1" headerValue="Seleccione um tipo de contrato"
 			list="listTipoContratos"
 			listKey="c_tipo"
 			listValue="c_tipo"
 			name="tipocontrato"/></div>
-<!-- 		</div>
-		
-		<div class ="row"> -->
+
+
 			<div class="col-sm-4"><s:select label = "Seleccione a Categoria Profissional"
 			headerKey="-1" headerValue="Seleccione uma categoria profissional"
 			list="listCatProf"
 			listKey="n_cat_prof"
 			listValue="n_cat_prof"
 			name="tipocatprof"/></div>
-		</div>
 		
 		<div class ="row">
 			<div class ="col-sm-2">Nome do Colaborador:</div>
@@ -137,7 +135,8 @@
 
 	
 		<input type ="submit" value ="Gerar Proposta"/>
-		</s:form>
+		</form>
+<%-- 		</s:form> --%>
 
 		
 		
