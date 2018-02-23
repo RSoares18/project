@@ -48,22 +48,141 @@
 
 
 
-		
-		<div align ="left">
-			<div class ="container-fluid">
-				
-				<h1> Bem-Vindo, <%=username1 %></h1>
+		<div class ="row">
+			<div class="col-md-3" style="text-align: center;">
+				<h2> Bem-Vindo, <%=username1 %></h2>
 			</div>
-		 </div>
-		
-		
-		<div align = "center">
-		
-		<h2> Preencha o seguinte formulário:</h2>
+			<div class="col-md-6" style="text-align: center;">
+				<h2> Preencha o seguinte formulário:</h2>
+			</div>
+			<div class="col-md-3" style="text-align: right; padding-right: 64px;">
+		 		<img src ="adlogo1.jpg" alt="adentis">
+		 	</div>
 		</div>
+		
 <%-- 		<s:form class ="fields" action ="DocumentAction" method="post"> --%>
 		
-		<form action ="DocumentAction" method ="post">
+		<form class = "form-horizontal" action ="DocumentAction" method ="post">
+			<div class ="form-group">
+			<div class="row">
+			<label class ="control-label col-sm-2" for="solicitador">Solicitador de Proposta</label>
+				<div class="col-sm-8">
+					<input type ="text" class="form-control" id ="solicitador" name="solicitador" value ="${param.username}" readonly="readonly"/>
+				</div>
+				</div>
+			</div>
+			<div class ="form-group">
+			<div class ="row">
+			<label class ="control-label col-sm-2" for="data">Data da Proposta</label>
+				<div class="col-sm-8">
+					<input type ="text" class="form-control" id ="data" name="data" value ="<%=data %>" readonly="readonly"/>
+				</div>
+				</div>
+			</div>
+			<div class ="form-group">
+			<div class="row">
+			<label class ="control-label col-sm-2" for="data">Localização: </label>
+				<div class="col-sm-8">
+					<input type ="text" class="form-control" id ="localizacao" placeholder ="Introduza a localização" name="localizacao" />
+				</div>
+				</div>
+			</div>
+			<br>
+			<div class ="form-group">
+				<div class ="row" style="margin-left: 308px;">
+					<div class="col-sm-3">
+						<s:select 
+						headerKey="-1" headerValue="Seleccione o Tipo de proposta"
+						list="listTipoPropostas"
+						listKey="p_tipo"
+						listValue="p_tipo"
+						name="tipoproposta"/>
+					</div>
+		
+		
+					<div class="col-sm-3">
+						<s:select 
+						headerKey="-1" headerValue="Seleccione o Tipo de contrato"
+						list="listTipoContratos"
+						listKey="c_tipo"
+						listValue="c_tipo"
+						name="tipocontrato"/>
+					</div>
+		
+		
+					<div class="col-sm-3">
+						<s:select 
+						headerKey="-1" headerValue="Categoria profissional"
+						list="listCatProf"
+						listKey="n_cat_prof"
+						listValue="n_cat_prof"
+						name="tipocatprof"/>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class ="form-group">
+			<div class ="row">
+			<label class ="control-label col-sm-2" for="destino">Nome do Colaborador</label>
+				<div class="col-sm-4">
+					<input type ="text" class="form-control" id ="destino" name="destino"/>
+				</div>
+				</div>
+			</div>
+			<div class ="form-group">
+			<div class="row">
+			<label class ="control-label col-sm-2" for="salariobruto">Salário Bruto: </label>
+				<div class="col-sm-4">
+					<input type ="text" class="form-control" id ="salariobruto" name="salariobruto" /> 
+				</div>
+				<label class ="control-label col-sm-1">&#8364</label>
+				</div>
+			</div>
+			<div class ="form-group">
+			<div class="row">
+			<label class ="control-label col-sm-2" for="salarioliquido">Salário Líquido: </label>
+				<div class="col-sm-4">
+					<input type ="text" class="form-control" id ="salarioliquido" name="salarioliquido" />	
+				</div>
+				<label class ="control-label col-sm-1">&#8364</label>
+				</div>
+			</div>
+			<div class ="form-group">
+			<div class="row">
+			<label class ="control-label col-sm-2" for="salarioliqanual">Salário Líquido Anual: </label>
+				<div class="col-sm-4">
+					<input type ="text" class="form-control" id ="salarioliqanual" name="salarioliqanual" />
+				</div>
+				<label class ="control-label col-sm-1">&#8364</label>
+				</div>
+			</div>
+			<div class ="form-group">
+			<div class="row">
+			<label class ="control-label col-sm-2" for="subalimentacao">Subsídio de Alimentação: </label>
+				<div class="col-sm-4">
+					<input type ="text" class="form-control" id ="subalimentacao" name="subalimentacao" value = <%= subalimentacao %> step ="0.01" readonly="readonly" />
+				</div>
+				<label class ="control-label col-sm-1">&#8364</label>
+				</div>
+			</div>
+			<div class ="form-group">
+			<div class="row">
+			<label class ="control-label col-sm-2" for="plbeneficios">Plano de Benefícios </label>
+				<div class="col-sm-4">
+					<input type ="text" class="form-control" id ="plbeneficios" name="plbeneficios" value = <%= plbeneficios %> step ="0.01" readonly="readonly" />
+				</div>
+				<label class ="control-label col-sm-1">&#8364</label>
+				</div>
+			</div>
+			
+		
+		<div class="col-sm-offset-2 col-sm-10">
+		<input type ="submit" value ="Gerar Proposta"/>
+		</div>
+		
+		</form>
+		
+<%-- 		<form action ="DocumentAction" method ="post">
 		<div class ="row">
 			<div class="col-sm-2"> Solicitador de Proposta: </div>
 			<div class="col-sm-1"><input type = "text" name="solicitador" value= "${param.username}" readonly="readonly" /> </div>
@@ -101,9 +220,9 @@
 			list="listCatProf"
 			listKey="n_cat_prof"
 			listValue="n_cat_prof"
-			name="tipocatprof"/></div>
+			name="tipocatprof"/></div> --%>
 		
-		<div class ="row">
+<%-- 		<div class ="row">
 			<div class ="col-sm-2">Nome do Colaborador:</div>
 			<div class ="col-sm-1"><input type = "text" name="destino"/></div>
 		</div>
@@ -131,14 +250,13 @@
 		<div class ="row">
 			<div class ="col-sm-2">Plano de Benefícios:</div>
 			<div class ="col-sm-2"><input type = "text" name="plbeneficios" value =<%=plbeneficios %> readonly="readonly" step="0.01"  /> &#8364  </div>
-		</div>
+		</div> --%>
 
-	
-		<input type ="submit" value ="Gerar Proposta"/>
-		</form>
+		
+		
+		<!-- </form> -->
 <%-- 		</s:form> --%>
 
-		
-		
+				
 </body>
 </html>

@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPageSz;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STPageOrientation;
 
 import pt.adentis.gerador.model.Geral;
 
@@ -184,6 +189,22 @@ public class DocumentAction extends HttpServlet{
 			List<XWPFParagraph> par = docx.getParagraphs();
 			
 			XWPFDocument newDoc = new XWPFDocument();
+			CTBody body = newDoc.getDocument().getBody();
+			if(!body.isSetSectPr()){
+			body.addNewSectPr();
+			}
+			 
+			CTSectPr section = body.getSectPr();
+			if(!section.isSetPgSz()){
+			section.addNewPgSz();
+			}
+			 
+			CTPageSz pageSize = section.getPgSz();
+			pageSize.setOrient(STPageOrientation.LANDSCAPE);
+			//A4 = 595x842 / multiply 20 since BigInteger represents 1/20 Point
+			pageSize.setW(BigInteger.valueOf(16840));
+			pageSize.setH(BigInteger.valueOf(11900));
+			
 			
 			for(XWPFParagraph p : par) {
 				if(!p.getParagraphText().isEmpty()) {
@@ -442,7 +463,7 @@ public class DocumentAction extends HttpServlet{
 				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\adentispg1.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\adentispg1.png", Units.toEMU(150), Units.toEMU(130));
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\adentispg1.png", Units.toEMU(120), Units.toEMU(100));
 				
 				pic.close();
 			
@@ -458,7 +479,7 @@ public class DocumentAction extends HttpServlet{
 				File img = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\moleculas.png");
 				System.out.println("!!!!PICPICPIC!!!!!");
 				pic = new FileInputStream(img);
-				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\moleculas.png", Units.toEMU(230), Units.toEMU(204));
+				r.addPicture(pic, XWPFDocument.PICTURE_TYPE_PNG, "C:\\Users\\" + System.getProperty("user.name") + "\\Desktop\\pics\\moleculas.png", Units.toEMU(356), Units.toEMU(316));
 				r.getParagraph().setAlignment(ParagraphAlignment.RIGHT);
 				
 				pic.close();
@@ -723,12 +744,6 @@ public class DocumentAction extends HttpServlet{
 		} finally {
 			ss.close();
 		}
-		
-	}
-	
-	public void checkCatProf(XWPFRun run) {
-		String txt = run.getText(0);
-		
 		
 	}
 
