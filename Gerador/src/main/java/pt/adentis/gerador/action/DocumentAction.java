@@ -24,17 +24,21 @@ import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFStyle;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.apache.xmlbeans.XmlException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTColumn;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPageSz;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STPageOrientation;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.impl.CTColumnsImpl;
 
 import pt.adentis.gerador.model.Geral;
 
@@ -189,6 +193,7 @@ public class DocumentAction extends HttpServlet{
 			List<XWPFParagraph> par = docx.getParagraphs();
 			
 			XWPFDocument newDoc = new XWPFDocument();
+			
 			CTBody body = newDoc.getDocument().getBody();
 			if(!body.isSetSectPr()){
 			body.addNewSectPr();
@@ -201,14 +206,19 @@ public class DocumentAction extends HttpServlet{
 			 
 			CTPageSz pageSize = section.getPgSz();
 			pageSize.setOrient(STPageOrientation.LANDSCAPE);
-			//A4 = 595x842 / multiply 20 since BigInteger represents 1/20 Point
 			pageSize.setW(BigInteger.valueOf(16840));
 			pageSize.setH(BigInteger.valueOf(11900));
 			
 			
+			
 			for(XWPFParagraph p : par) {
 				if(!p.getParagraphText().isEmpty()) {
+					
 					XWPFParagraph newP = newDoc.createParagraph();
+					
+					
+					
+				
 					copyText(p,newP);
 				}
 			}
@@ -223,7 +233,7 @@ public class DocumentAction extends HttpServlet{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		
 		return null;
 	}
@@ -240,6 +250,7 @@ public class DocumentAction extends HttpServlet{
 			
 			XWPFRun newR = newP.createRun();
 			
+			
 			newR.setText(text);
 			
 			newR.setFontSize((fs == -1) ? FONT : r.getFontSize());
@@ -247,6 +258,7 @@ public class DocumentAction extends HttpServlet{
 			newR.setBold(r.isBold());
 			newR.setItalic(r.isItalic());
 			newR.setColor(r.getColor());
+			
 		}
 	}
 	
